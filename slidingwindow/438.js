@@ -1,3 +1,10 @@
+/*
+Window size is fixed: p.
+Left pointer will move foward when window moves
+Two pointer starting from left towards right
+normally, Sliding window: T:O(n) S:O(n)
+*/
+
 const asscii = "a".charCodeAt();
 
 var findAnagrams = function (s, p) {
