@@ -1,3 +1,8 @@
+/*
+Minimum Window Substring
+
+Window size change(not fix, so count no need offset)
+*/
 const minWindow = function (s, t) {
   //corner case check input valid or not
   if (s == null || t == null || s.length < t.length) return "";
