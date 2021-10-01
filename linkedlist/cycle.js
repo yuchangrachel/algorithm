@@ -22,8 +22,8 @@ var detectCycle = function (head) {
 
   let slow = head;
   let fast = head;
-  //first meet
 
+  //first meet
   while (slow && fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
