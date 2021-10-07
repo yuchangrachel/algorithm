@@ -49,4 +49,5 @@ var removeDuplicateLetters = function (s) {
   return res.join("");
 };
 
-console.log(removeDuplicateLetters("bcabc")); //abc
+console.log(removeDuplicateLetters("bcbca")); //abc
+// console.log(removeDuplicateLetters("cbacdcbc")); //acdb
