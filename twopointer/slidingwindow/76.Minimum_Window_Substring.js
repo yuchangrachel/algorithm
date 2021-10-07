@@ -1,7 +1,7 @@
 /*
 Minimum Window Substring
 
-Window size change(not fix, so count no need offset)
+Window size changeable
 */
 const minWindow = function (s, t) {
   //corner case check input valid or not
@@ -16,7 +16,7 @@ const minWindow = function (s, t) {
 
   let left = 0,
     count = 0,
-    max = s.length + 1;
+    max = s.length + 1; //avoid s='a', t='a' will ->""
   let res = "";
   for (let right = 0; right < s.length; right++) {
     //update hash
@@ -29,12 +29,14 @@ const minWindow = function (s, t) {
     //keep removing uncessary: not exist or cur replace it
     //here not need handle count
     while (left < right && hash[s.charCodeAt(left)] < 0) {
+      //not need to deduct count since scan from left to right, won't consider left anymore
       hash[s.charCodeAt(left)]++; //recover
       left++;
     }
 
     //result
     if (count == t.length && max > right - left + 1) {
+      //must max > right -left+1,if =,nothing change, then cannot get into this statement
       max = right - left + 1;
       res = s.substring(left, right + 1);
     }
