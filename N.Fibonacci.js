@@ -1,3 +1,4 @@
+//509
 /*
 1WAY recursion
 COMPLEXITY: 
@@ -48,4 +49,15 @@ var fib = function (n) {
     [first, second] = [second, first + second];
   }
   return second;
+};
+
+//3WAYbottom-top dp
+var fib = function (n) {
+  if (n <= 1) return n;
+  const dp = new Array(n + 1).fill(0);
+  dp[1] = 1;
+  for (let i = 2; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+  return dp[n];
 };
