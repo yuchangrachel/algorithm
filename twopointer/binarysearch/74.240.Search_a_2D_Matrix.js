@@ -30,29 +30,25 @@ var searchMatrix = function (matrix, target) {
 
 //log(mn)
 //sort and search target: binary search
-var searchMatrix = function (matrix, target) {
-  if (
-    matrix == null ||
-    matrix[0] == null ||
-    matrix.length == 0 ||
-    matrix[0].length == 0
-  )
-    return false; //no result
-
-  let low = 0,
-    high = matrix.length * matrix[0].length;
-
-  while (low < high) {
-    let mid = parseInt((low + high) / 2);
-    let i = parseInt(mid / matrix[0].length),
-      j = mid % matrix[0].length; //num at mid index (row: / col; col: %col)
-    console.log("mid: ", matrix[i][j]);
-    if (matrix[i][j] == target) return true;
-    else if (matrix[i][j] > target) high = mid;
-    //not high = mid -1 since in while(low < high)loop, not include high, here must include high
-    else low = mid + 1;
-  }
-  return false;
+/*
+LOGIC:
+1.sorted 2d matrix, do binary search
+2.low set 0, high set m*n(higher), so while (low < high)
+3.process cell[i][j], real row = mid/coltotal#, real col = mid%coltotal#
+*/
+var searchMatrix = function(matrix, target) {
+    if (matrix == null || matrix[0] == null || matrix.length  == 0 || matrix[0].length == 0) return false
+    let low = 0, high = matrix.length * matrix[0].length
+    while (low < high){ //!= since high add extra 1
+        let mid = parseInt((low + high) / 2)
+        //process cell[i][j]
+        let i = parseInt(mid/matrix[0].length) //row /coltotal#!!! not rowtotal# eg.[[1,1]] 0
+        let j =mid % matrix[0].length //column %coltotal#
+        if (matrix[i][j] == target) return true
+        else if (target > matrix[i][j]) low = mid + 1
+        else high = mid 
+    }
+    return false
 };
 
 //240.Search a 2D Matrix II

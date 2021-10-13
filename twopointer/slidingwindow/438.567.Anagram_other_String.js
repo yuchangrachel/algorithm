@@ -49,8 +49,8 @@ var findAnagrams = function (s, p) {
     //check valid or not
     if (dic[s.charCodeAt(i) - a] >= 0) count++;
 
-    //move left
-    if (i > p.length - 1) {
+    //move left widow size is fixed
+    if (i - left + 1 > s1.length) {
       dic[s.charCodeAt(left) - a]++; //recover
       if (dic[s.charCodeAt(left) - a] > 0) count--; //count reset since need use it again, > 0 since = 0 means no cha in p
       left++;
@@ -108,7 +108,7 @@ var checkInclusion = function (s1, s2) {
     if (hash[s2.charCodeAt(right)] >= 0) count++;
 
     //move left
-    if (right > s1.length - 1) {
+    if (right - left + 1 > s1.length) {
       hash[s2.charCodeAt(left)]++;
       if (hash[s2.charCodeAt(left)] > 0) count--;
       left++;
