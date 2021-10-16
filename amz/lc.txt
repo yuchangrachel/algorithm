@@ -51,7 +51,7 @@
 51. LRU Cache
 52. Sort List
 53. Maximum Product Subarray
-54. Min Stack
+54. Min Stack [EASY]
 55. Intersection of Two Linked Lists
 56. Compare Version Numbers
 57. Two Sum II - Input array is sorted
@@ -71,7 +71,7 @@
 71. Count Complete Tree Nodes
 72. Basic Calculator
 73. Basic Calculator II
-74. Implement Queue using Stacks
+74. Implement Queue using Stacks [Easy]
 75. Palindrome Linked List
 76. Lowest Common Ancestor of a Binary Search Tree
 77. Lowest Common Ancestor of a Binary Tree
