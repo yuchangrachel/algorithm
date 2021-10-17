@@ -35,7 +35,7 @@
 35. Interleaving String
 36. Validate Binary Search Tree
 37. Same Tree
-38. Binary Tree Level Order Traversal
+38. Binary Tree Level Order Traversal [EASY]
 39. Binary Tree Level Order Traversal II
 40. Path Sum II
 41. Pascal's Triangle II
@@ -129,7 +129,7 @@
 129. Shortest Unsorted Continuous Subarray
 130. Construct String from Binary Tree
 131. Valid Triangle Number
-132. Merge Two Binary Trees
+132. Merge Two Binary Trees [EASY]
 133. Maximum Product of Three Numbers
 134. Exclusive Time of Functions
 135. Solve the Equation
