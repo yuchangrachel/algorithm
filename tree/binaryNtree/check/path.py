@@ -1,4 +1,5 @@
 '''
+543. Diameter of Binary Tree
 REFER:
 https://www.youtube.com/watch?v=3vZV-6qPDmE
 LOGIC:
@@ -19,6 +20,16 @@ class Solution:
         right = self.helper(root.right, diameter)
         diameter[0] = max(diameter[0], left+right)
         # return back to parent
-        return max(left, right) + 1 #1 mean one edge counted
+        return max(left, right) + 1 #1 mean one edge counted  # find maximum depth
         
+    
+# 104.Maximum Depth of Binary Tree
+'''
+    find longest path from root to leaves
+    dfs traversal, recursion go to bottom, then bottom-top call
+'''
+def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root: return 0
+        
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
         
