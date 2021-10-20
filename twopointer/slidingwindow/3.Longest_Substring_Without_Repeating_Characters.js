@@ -27,3 +27,23 @@ var lengthOfLongestSubstring = function (s) {
 
   return res;
 };
+/*
+# window size is changabl, only no repeating char in window
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s or len(s) == 0: return 0
+        
+        dic = [0] * 256
+        
+        res = 0
+        left = 0
+        
+        for i in range(len(s)):
+            dic[ord(s[i])] += 1
+            
+            while dic[ord(s[i])] > 1:
+                dic[ord(s[left])]-=1
+                left+=1
+            res = max(res, i - left + 1)
+        
+        return res
+*/
