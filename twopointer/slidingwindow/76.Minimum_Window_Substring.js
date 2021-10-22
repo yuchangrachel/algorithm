@@ -45,3 +45,43 @@ const minWindow = function (s, t) {
 };
 
 console.log(minWindow("ADOBECODEBANC", "ABC")); //"BANC"
+/*
+'''
+    1.sliding window, window size is changable
+    2.hash store t {char: frq}
+    3.count,left
+    '''
+    def minWindow(self, s: str, t: str) -> str:
+        if not s or not t or len(t) > len(s): return ""
+        
+        dic = collections.defaultdict(int)
+        for c in t:
+            dic[c] += 1
+        
+        count = 0
+        left = 0
+        res = ""
+        max_len = len(s) + 1 #check if meet, if not return "" but len(s) still valid since s = t
+        for i in range(len(s)):
+            # update hash
+            dic[s[i]] -= 1
+            
+            #valid
+            if dic[s[i]] >= 0:
+                count += 1
+                
+            # move left
+            while left < i and dic[s[left]] < 0:
+                dic[s[left]] += 1
+                left += 1
+            
+            if count == len(t) and i - left + 1 < max_len:
+                max_len = i - left + 1
+                res = s[left: i+1]
+                
+        if max_len == len(s) + 1:
+            return ""
+        else:
+            return res
+        
+*/
