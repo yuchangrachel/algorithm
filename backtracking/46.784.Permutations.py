@@ -1,4 +1,5 @@
 # 46.Permutation
+# 1WAY
 def permute(self, nums: List[int]) -> List[List[int]]:
         if not nums: return []
         
@@ -25,7 +26,29 @@ def helper(self, nums, index, inner, res, visited):
                 self.helper(nums, index+1, inner, res, visited) # use index tracker, not i, because i for track visited and insert, index for backtrack
                 inner.pop()
                 visited[i] = False
-
+#2WAY
+def permute(self, nums: List[int]) -> List[List[int]]:
+        if not nums or len(nums) == 0: return []
+        
+        self.res = []
+        self.visited= [False] * len(nums)
+        # inner function / in JS, called closure
+        def dfs(inner, index):
+            # terminate case
+            if index == len(nums):
+                self.res.append(inner.copy())
+                return
+            else:
+                for i in range(len(nums)):
+                    if self.visited[i]: continue
+                    else:
+                        inner.append(nums[i])
+                        self.visited[i] = True
+                        dfs(inner, index+1)
+                        inner.pop()
+                        self.visited[i] = False     
+        dfs([], 0)
+        return self.res
 '''
 784. Letter Case Permutation
     LOGIC:
