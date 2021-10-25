@@ -10,7 +10,7 @@ class MinStack:
         self.s.append(val)
         
         if len(self.miner) > 0:
-            if val <= self.miner[-1]:
+            if val <= self.miner[-1]: #must <=!!
                 self.miner.append(val)
         else:
             self.miner.append(val) 
