@@ -45,3 +45,26 @@ def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
                 cur = top.right
         return res
             
+# 530.Minimum absolute difference in BST
+def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        '''
+        BST inorder:sorted
+        How to get mindiff, comes from neighbor. compare to prevnode, update diff
+        '''
+        self.min_diff =float('inf')
+        self.prev = -1 #store prev node, 
+        
+        def inorder(root):
+            if not root:return
+            inorder(root.left)
+            
+            if self.prev != -1: #no prev, so nothing compare with root 
+                self.min_diff = min(self.min_diff, abs(self.prev - root.val))
+
+            self.prev = root.val
+            
+            inorder(root.right)
+            
+            
+        inorder(root)
+        return self.min_diff

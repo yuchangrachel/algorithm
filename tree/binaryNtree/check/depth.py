@@ -22,18 +22,41 @@ def NodeMaxHeight(root):
 
 # get min depth of whole tree
 def minDepth(root):
+    #dfs
+        # if not root: return 0
+        
+        # # think about skew 
+        # if not root.left:
+        #     return 1 + minDepth(root.right)
+        # if not root.right:
+        #     return 1 + minDepth(root.left)
+        # return 1 + min(minDepth(root.left), minDepth(root.right))
+    #bfs
         if not root: return 0
-        left = minDepth(root.left)
-        right = minDepth(root.right)
-        #think skew tree
-        if not left:
-            return right + 1
-        elif not right:
-            return left + 1
-        else:
-            return 1 + min(left, right)
+        
+        #bfs 
+        q = deque([root])
+        level = 1 # root counted
+        
+        while len(q) > 0:
+            size = len(q)
+            index = 0
+            while index < size:
+                top = q.popleft()
+                if not top.left and not top.right: # this is leaf
+                    return level
+                else:
+                    if top.left:
+                        q.append(top.left)
+                    if top.right:
+                        q.append(top.right)
+                index+= 1
+            level += 1
+        return 0
     
 root = TreeNode(1)
+root.left = TreeNode(20)
 root.right = TreeNode(2)
 root.right.right = TreeNode(3)
 print(isBalanced(root))
+print(minDepth((root)))
