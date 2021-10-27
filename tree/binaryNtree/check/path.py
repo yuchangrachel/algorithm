@@ -20,6 +20,29 @@ def helper (self, root, diameter):
         diameter[0] = max(diameter[0], left+right)
         # return back to parent
         return max(left, right) + 1 #1 mean one edge counted  # find maximum depth
+
+def diameterOfBinaryTree2(self, root: Optional[TreeNode]) -> int:
+        '''
+        How to find two nodes whose path are longest, may not pass through root, but difinitely reach two leaves.
+        dfs go to bottom and go up count depth,compare maxdepth(left, right) + 1
+        update diameter(left+right)
+        '''
+        if not root: return 0
+        self.diameter = 0
+        def dfs(root):
+            if not root: return 0
+            
+            lefter = dfs(root.left)
+            righter = dfs(root.right)
+            
+            self.diameter = max(self.diameter, lefter+righter)
+            
+            #maxdepth
+            return 1 + max(lefter, righter)
+            
+            
+        dfs(root)
+        return self.diameter
         
 # 257 Binary Tree Paths
 def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:

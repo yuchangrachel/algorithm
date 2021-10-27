@@ -35,3 +35,15 @@ def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
             if top.left:
                 stack.append(top.left)
         return res
+        
+#589. N-ary Tree Preorder Traversal
+ def preorder(self, root: 'Node') -> List[int]:
+        self.res = []
+        def dfs(root):
+            if not root: return
+            self.res.append(root.val)
+            if root.children:   
+                for i in range(len(root.children)):
+                    dfs(root.children[i])
+        dfs(root)
+        return self.res
