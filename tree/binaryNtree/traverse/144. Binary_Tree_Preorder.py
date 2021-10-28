@@ -47,3 +47,13 @@ def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
                     dfs(root.children[i])
         dfs(root)
         return self.res
+
+#700. Search in a Binary Search Tree
+def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root: return None
+        
+        # preorder traverse
+        if root.val == val: return root
+        elif val < root.val:
+            return self.searchBST(root.left, val)
+        else: return self.searchBST(root.right, val)
