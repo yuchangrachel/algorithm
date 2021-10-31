@@ -2,6 +2,11 @@
 # see top k, think about heap pq minheap O(nlogk)
 # return k nums who most frequent,if k=2, will have two two top.
 def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+	#1 WAY
+	dic = collections.Counter(nums)
+        return heapq.nlargest(k, dic, key=lambda k:dic[k])
+        
+        #2 WAY
         if nums is None or len(nums) == 0 or k == 0: return []
         
         # create hash store{num:freq}
