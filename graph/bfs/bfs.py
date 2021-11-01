@@ -1,29 +1,4 @@
-# 102. Binary Tree Level Order Traversal
-# level-order traversal = breath first search
-from collections import deque
-class Solution:
-    # Level order traversal mean use queue
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        if not root: return [] #no nodes'values
-        
-        q=deque()
-        q.append(root)
-        res = []
-        while len(q) > 0:
-            size = len(q)
-            index = 0
-            inner = []
-            while index < size:
-                top = q.popleft()
-                inner.append(top.val)
-                
-                if top.left:
-                    q.append(top.left)
-                if top.right:
-                    q.append(top.right)
-                index += 1
-            res.append(inner)
-        return res
+
             
 # 116. Populating Next Right Pointers in Each Node
 from collections import deque
@@ -96,55 +71,3 @@ class Solution:
                 
         return mat
 
-# 994.Rotting Oranges
-from collections import deque
-class Solution:
-    '''
-    LOGIC:
-    1.If at the beginning, no fresh, min = 0; otherwise check and rot fresh level by level, if cannot rot all fresh, then return -1
-    2.bfs 
-    '''
-    def orangesRotting(self, grid: List[List[int]]) -> int:
-        if not grid or not grid[0] or len(grid) == 0 or len(grid[0]) == 0: return -1
- 
-        freshcount = 0
-        
-        # bfs
-        q = deque()
-        direction = [[1,0],[-1, 0], [0, 1], [0,-1]]
-        #store all rot's coordinate into q, and spread out
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == 2:
-                    q.append((i, j))
-                elif grid[i][j] == 1:
-                    freshcount += 1
-       
-        minute = 0
-        while len(q) > 0 and freshcount > 0:
-            size = len(q)
-            index = 0
-            while index < size:
-                top = q.popleft()
-            
-                for dir in direction:
-                    x = top[0] + dir[0]
-                    y = top[1] + dir[1]
-                
-                    # check boundary or invalid input
-                    if x < 0 or y < 0 or x >= len(grid) or y >= len(grid[0]) or grid[x][y] == 0 or grid[x][y] == 2: continue
-
-                    grid[x][y] = 2 #change 1 to 2
-                    # only store new rot
-                    q.append((x,y))
-                    freshcount -= 1
-                index+=1
-                
-            minute += 1
-            
-            
-        print(grid)
-        if freshcount == 0:
-            return minute
-        else:
-            return -1 #can't rot all fresh
