@@ -1,6 +1,5 @@
 def numTrees(self, n: int) -> int:
         '''
-        REFER:https://leetcode.com/problems/unique-binary-search-trees/discuss/703644/PythonEasy-DP-Solution-Explained-By-Someone-Who-Used-To-Struggle-To-Understand-DP
         LOGIC:
         Similar to all possible unique path => dp
         left and right subtree combination use multiple operation since they are independent event
