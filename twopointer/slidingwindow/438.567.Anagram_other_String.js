@@ -120,4 +120,40 @@ var checkInclusion = function (s1, s2) {
   return false;
 };
 
+def checkInclusion(self, s1: str, s2: str) -> bool:
+        '''
+        LOGIC:
+        sliding window, window size is fixed (s1 permutation)
+        window = s1 all permutation
+        hardest part: if find not permutated string of s1, has other chars : while i - left + 1 > len(s1):
+        '''
+        if len(s1) > len(s2) or not s1 or not s2 or len(s1) == 0 or len(s2) == 0: return False
+        
+        # create hash for s1
+        a = ord('a')
+        dic = [0] * 26
+        for c in s1:
+            dic[ord(c) - a] += 1
+        
+        left = 0
+        count = 0
+
+        for i in range(len(s2)):
+            dic[ord(s2[i]) - a] -= 1
+            
+            if dic[ord(s2[i]) - a] >= 0:
+                count += 1
+            
+            while i - left + 1 > len(s1):
+                dic[ord(s2[left]) - a] += 1
+                # need reset count
+                if dic[ord(s2[left]) - a] > 0: # work before
+                    count -= 1
+                left += 1
+            
+            if count == len(s1):
+                return True
+            
+        return False
+
 console.log(checkInclusion("ab", "eidbaooo"));
