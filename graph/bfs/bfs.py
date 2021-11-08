@@ -29,45 +29,43 @@ class Solution:
 # 542. 01Matrix
 from collections import deque
 class Solution:
-    '''
-    LOGIC:
-    cell's new value is distance with nearest 0
-    If in graph, find shortest distance, will think about bfs.
-    if [i][j] == 0:then still[i][j], all 0s are starting points, store into q
-    if [i][j] == 1: update to the max, explore neighbors, if boundary or neighbors < cur + 1, neighbor dont need update(since already min)
-    '''
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
-        if not mat or not mat[0] or len(mat)==0 or len(mat[0])==0: return [[]]
+        '''
+        LOGIC:
+        Find nearest distance use BFS in graph
+        0s all are starting point, store into queue, dont need while index < size template because all 0s are not direct relationship
+        1s store max value
+        if meet boundary or newNode <= cur + 1 this cell already found shortest distance to 0
+        '''
+        if not mat or not mat[0] or len(mat) == 0 or len(mat[0]) == 0: return []
         
         q = deque()
+        dir =[[1,0], [-1, 0], [0, 1], [0, -1]]
         
-        # doing bfs, most time will set 4 direction array first
-        dist = [[1, 0], [-1, 0], [0, 1], [0, -1]]
-        
-        # search 2d array if that is 0, add its coordinate into queue
+        # store 0s into q and 1s reassign as max_val
         for i in range(len(mat)):
             for j in range(len(mat[0])):
                 if mat[i][j] == 0:
-                    q.append((i, j)) # add tuple in queue all 0s are starting point
+                    q.append((i,j))
                 else:
-                    mat[i][j] = float('inf') # temperarily change in-place
-                    
+                    mat[i][j] = float('inf')
+           
         while len(q) > 0:
             top = q.popleft()
-            for dir in dist:
-                # x, y are neighbor of 0s
-                x = top[0]+dir[0] 
-                y = top[1] + dir[1]
+            cur = mat[top[0]][top[1]]
+            
+            for d in dir:
+                x = top[0] + d[0]
+                y = top[1] + d[1]
                 
-                #check boundary or invalid input
-                if x < 0 or y < 0 or x >= len(mat) or y >= len(mat[0]) or mat[x][y] <= mat[top[0]][top[1]] + 1: 
+                # check 4 direction neighbors if valid or not 
+                if x < 0 or y < 0 or x >= len(mat) or y >= len(mat[0]) or mat[x][y] <= cur + 1:
                     continue
-                
-                #need update neighbor
-                mat[x][y] = mat[top[0]][top[1]] + 1
-                
-                # store neighbor coordinate into q, need reach more cell far away from 0s
-                q.append((x,y))
-                
+                else:
+                    mat[x][y] = cur + 1
+                    
+                    # store not 0s but updated distance value into queue
+                    q.append((x,y))
+        
         return mat
-
+                    
