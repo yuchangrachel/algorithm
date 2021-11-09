@@ -1,3 +1,6 @@
+# Time Complexity O(n^k) which is the same as (n C k)
+# Space Complexity O(n^k)
+
 def combine(self, n: int, k: int) -> List[List[int]]:
         if k > n: return []
         
