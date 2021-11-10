@@ -12,6 +12,9 @@ minpath[i] = min(minpath[i], minpath[i+1]) + triangle[i]
 HOW:
 1.store last row into dp
 2.layer starting from second last row, and layer has (layer+1) elements
+T/S:
+T:O(n^2)
+S:O(len(triangle[-1]))
 '''
 def minimumTotal(self, triangle: List[List[int]]) -> int:
         if not triangle or len(triangle) == 0: return 0
