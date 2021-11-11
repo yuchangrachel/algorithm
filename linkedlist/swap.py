@@ -18,7 +18,7 @@ def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         
         return dummy.next
             
-    def swap(self, prev):
+def swap(self, prev):
         temp = prev.next #store 1
         prev.next = temp.next # break 1,2 let prev-> 2
         temp.next = temp.next.next#1 -> rest(skip2)
