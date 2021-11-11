@@ -1,0 +1,14 @@
+1.from list of numbers return lists of T/F
+In Python3
+max_v = max(candies)
+[candy + extraCandies >= max_v for candy in candies]
+
+In JavaScript
+const max_v = Math.max(...candies)
+return candies.map(candy => candy + extraCandies >= max_v)
+
+2.from list of string, return sum
+In Python3
+sum(1 if "+" in operation else -1 for operation in operations)
+In JavaScript
+operations.reduce((acc,cur)=> cur.includes("+") ? ++acc : --acc, 0)
