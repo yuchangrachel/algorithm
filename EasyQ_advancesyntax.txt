@@ -12,3 +12,7 @@ In Python3
 sum(1 if "+" in operation else -1 for operation in operations)
 In JavaScript
 operations.reduce((acc,cur)=> cur.includes("+") ? ++acc : --acc, 0)
+
+3.two string, return number of common characters
+In JavaScript
+stones.split("").reduce((acc, cur)=> jewels.includes(cur) ? acc+1: acc, 0)

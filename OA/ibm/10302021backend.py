@@ -142,7 +142,7 @@ def binarysearch(ls, target, index):
     
     while low < high:
         if ls[low] + ls[high] <= target:
-            # WHY HIGH - LOW? eg.[4]-[1]=>1,2,3;1,2,4;1,2,5(three possibilities). [3]-[2]=>1,3,4(one possibility)
+            # WHY HIGH - LOW? eg.[4]-[1]=>1,2,3;1,2,4;1,3,4(three possibilities). [3]-[2]=>1,3,4(one possibility)
             # (2,4) (2,3) (2,5) | (3,4)
     
             count += high - low  # !HARD TO THINK!MUST REVIEW!
