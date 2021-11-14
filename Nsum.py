@@ -9,6 +9,7 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
         
         for i in range(0,len(nums) - 2): # actually three loops, outer(-2),inner(-1 and 0)
             # since sorted, compare to neighbor, avoid first num[i] duplicate
+            # check first if has duplicates, check each time use IF STATEMENT
             if i > 0 and nums[i] == nums[i-1]: 
                 continue
                 

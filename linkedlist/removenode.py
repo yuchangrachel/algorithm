@@ -100,4 +100,36 @@ def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
 '''     
 82. Remove Duplicates from Sorted List II
+var deleteDuplicates = function(head) {
+    /*
+    TOPIC:Remove nodes
+    HOW:
+    remove all duplicates, so maybe need remove head so need create dummy
+    handle cases like 1->1->2 and 1->2,use cur for tracking duplicate loop
+    variable:prev link to next, cur tracking duplicate loop
+    */
+    
+    if (head === null) return head
+    
+    let dummy = new ListNode(-1)
+    
+    dummy.next = head
+    let prev = dummy
+    while (prev.next != null){
+        let cur = prev.next
+        //track duplicate loop
+        while (cur.next && cur.val == cur.next.val){
+            cur = cur.next
+        }
+        if (prev.next == cur){
+            //didnt have duplicate so far
+            prev = prev.next
+        }
+        else{
+            //have duplicate sublist need link this sublist's next
+            prev.next = cur.next
+        }       
+    }
+    return dummy.next   
+};
 '''
