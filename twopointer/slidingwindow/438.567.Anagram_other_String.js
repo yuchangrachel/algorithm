@@ -20,48 +20,44 @@ LOGIC:
 Complexity: T:O(n) S:O(p)
 
 */
-const a = "a".charCodeAt();
-var findAnagrams = function (s, p) {
-  if (
-    p == null ||
-    s == null ||
-    p.length == 0 ||
-    s.length == 0 ||
-    p.length > s.length
-  )
-    return [];
-
-  //create hash
-  //only lower case
-  const dic = new Array(26).fill(0);
-  for (let c of p) {
-    dic[c.charCodeAt() - a]++;
-  }
-
-  //create variable
-  let res = [],
-    count = 0,
-    left = 0;
-  for (let i = 0; i < s.length; i++) {
-    //update hash
-    dic[s.charCodeAt(i) - a]--;
-
-    //check valid or not
-    if (dic[s.charCodeAt(i) - a] >= 0) count++;
-
-    //move left widow size is fixed
-    if (i - left + 1 > s1.length) {
-      dic[s.charCodeAt(left) - a]++; //recover
-      if (dic[s.charCodeAt(left) - a] > 0) count--; //count reset since need use it again, > 0 since = 0 means no cha in p
-      left++;
+const a = "a".charCodeAt()
+var findAnagrams = function(s, p) {
+    if (s.length < p.length || s == null || p == null) return []
+    
+    //store p in hash, array will be space-efficient than hashmap
+    //only store lowercase
+    const dic = new Array(26).fill(0)
+    for (let ch of p){
+        dic[ch.charCodeAt() - a] += 1
     }
-
-    //check result
-    if (count == p.length) {
-      res.push(left);
+    
+    //variable
+    let count = 0 //check if find p
+    let left = 0
+    const res = []
+    
+    for (let i = 0; i < s.length; i++){
+        //update counter map
+        dic[s[i].charCodeAt() - a] --
+        
+        //check if valid
+        if (dic[s[i].charCodeAt() - a] >= 0) count+=1
+        
+        //check if need move left pointer
+        while ((i - left + 1) > p.length){
+            //reset left
+            dic[s[left].charCodeAt() - a] ++
+            
+            //if left valid before, if yes, count --
+            if (dic[s[left].charCodeAt() - a] > 0) count -=1
+            left += 1
+        }
+        
+        if (count == p.length){
+            res.push(left)
+        }
     }
-  }
-  return res;
+    return res
 };
 // console.log(findAnagrams("acba", "ab"));
 
