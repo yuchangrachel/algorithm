@@ -51,3 +51,39 @@ print(merge([[2,3],[2,2],[3,3],[1,3],[5,7],[2,2],[4,6]])) #[[1,3],[4,7]]
 #     }
 #     return res
 # };
+
+# 986. Interval List Intersections
+'''
+var intervalIntersection = function(firstList, secondList) {
+    //TOPIC: Two List interval TWO POINTER
+    //HOW: think cases, if no intervals, moveforward; else interval[max(first), min(second)], when merge need move forward
+    if (firstList == null || secondList == null) return []
+    
+    const res = []
+    let i = 0
+    let j = 0
+    while (i < firstList.length && j < secondList.length){
+        if (firstList[i][0] > secondList[j][1]) //no interval move on
+            j+=1
+        
+        else if (secondList[j][0] > firstList[i][1]){ //no interval move on
+            i+=1
+        }
+        else{
+            //has interval
+            let interval = [Math.max(firstList[i][0], secondList[j][0]), Math.min(firstList[i][1], secondList[j][1])]
+            res.push(interval)
+            //move on
+            //see whose end is bigger
+            if (firstList[i][1] > secondList[j][1])  j++
+            else if (firstList[i][1] < secondList[j][1]) i++
+            else{
+                //same length
+                i++
+                j++
+            }
+        }
+    }
+    return res
+};
+'''
