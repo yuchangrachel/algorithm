@@ -1,3 +1,4 @@
+116
 from collections import deque
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
@@ -25,3 +26,24 @@ class Solution:
         
         return root
                 
+117
+var connect = function(root) {
+    //1WAY BFS - queue S:O(n) ADD next pointer for nodes
+    if (root == null) return root
+    const q = []
+    q.push(root)
+    
+    while (q.length > 0){
+        let size = q.length
+        while (size > 0){
+            let top = q.shift()
+            if (size >1){ //have more in cur level
+                top.next = q[0]
+            }
+            size -= 1
+            if (top.left != null) q.push(top.left)
+            if (top.right != null) q.push(top.right)
+        }  
+    }
+    return root
+};
