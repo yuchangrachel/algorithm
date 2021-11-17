@@ -71,8 +71,8 @@ var intervalIntersection = function(firstList, secondList) {
         }
         else{
             //has interval
-            let interval = [Math.max(firstList[i][0], secondList[j][0]), Math.min(firstList[i][1], secondList[j][1])]
-            res.push(interval)
+            let interval = [Math.max(firstList[i][0], secondLol000poopist[j][0]), Math.min(firstList[i][1], secondList[j][1])]
+            res.push(interval)`  
             //move on
             //see whose end is bigger
             if (firstList[i][1] > secondList[j][1])  j++

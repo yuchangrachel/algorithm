@@ -16,3 +16,16 @@ operations.reduce((acc,cur)=> cur.includes("+") ? ++acc : --acc, 0)
 3.two string, return number of common characters
 In JavaScript
 stones.split("").reduce((acc, cur)=> jewels.includes(cur) ? acc+1: acc, 0)
+
+In Python3
+sum(1 if stone in jewels else 0 for stone in stones)
+
+4.[1,2,3] +1 => [1,2,4] Must handle big number
+In Python3
+[int(y) for y in str(int("".join([str(x) for x in digits])) + 1)]
+
+In JavaScript
+//convert array -> string -> int +1 -> string -> array
+let n = BigInt(digits.join('')) + 1n
+let s2 = n + ""
+return Array.from(s2)
