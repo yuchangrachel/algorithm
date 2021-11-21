@@ -21,6 +21,44 @@ def permute(nums):
                         self.visited[i] = False     
         dfs([], 0)
         return self.res
+
+'''
+99.Subset (avoid duplicate result)
+var permuteUnique = function(nums) {
+    if (nums == null || nums.length == 0) return []
+    
+    //sort first avoid duplicate
+    nums.sort((a,b)=> a-b)
+    const res = []
+    const visit = new Array(nums.length).fill(false)
+    
+    dfs = function(index, inner){
+        if (index == nums.length){
+            res.push([...inner])
+            return
+        }
+        for(let i = 0; i < nums.length; i++){
+            if (visit[i]) continue
+            if (i > 0 && nums[i] == nums[i-1] && !visit[i-1]){ 
+                //WHY? beacause 1(0i),1(1i),2 (T->T->T)(WANT) 1(1i),1(0i), 2(F, T, T)(AVOID)
+                continue
+            }
+            else{
+                visit[i] = true
+                inner.push(nums[i])
+                dfs(index+1, inner)
+                visit[i] = false
+                inner.pop()
+            }
+        
+        }
+    }
+    dfs(0, [])
+    return res
+};
+
+'''
+
 '''
 784. Letter Case Permutation
     LOGIC:
