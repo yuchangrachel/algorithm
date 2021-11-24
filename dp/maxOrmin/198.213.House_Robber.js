@@ -1,25 +1,4 @@
-/*
-198. House Robber
-LOGIC:
-1.Not like mincost for climbing stair return dp[len-1] or dp[len-2]pick min one, since stair case start from 0index or 1index. 
-2.Other case starting from same starting point will return dp[n]
-*/
-// def rob(self, nums: List[int]) -> int:
-//         if not nums or len(nums) == 0: return 0
 
-//         res = 0
-//         dp = [0] * len(nums)
-
-//         dp[0] = nums[0]
-//         if len(nums) == 1: return dp[0]
-//         dp[1] = max(dp[0], nums[1])
-//         if len(nums) == 2: return dp[1]
-
-//         for i in range(2, len(nums)):
-//             dp[i] = max(dp[i-2] + nums[i], dp[i-1])
-//             res = max(res, dp[i])
-
-//         return res
 
 /*
 213.
