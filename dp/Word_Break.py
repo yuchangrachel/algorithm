@@ -1,19 +1,13 @@
 '''
     1WAY: TLE
     BRUTE FORCE
-    TIME COMPELEXITY: 2^n 
-    REASON:
-    T(N) = T(N-1) + T(N-2) + ... + T(0)
-    T(N-1) = T(N-2) + ... + T(0)
-    T(N) - T(N-1) = T(N-1)
-    T(N) = 2*T(N-1)
-    O(2^N)
-    REFER:https://leetcode.com/problems/word-break/discuss/169383/solved-The-Time-Complexity-of-The-Brute-Force-Method-Should-Be-O(2n)-and-Prove-It-Below
+Time: O(N*N) since each time it has at most N choices and the depth (problem size) is N. (this is an upper bound)
+Space: O(N) (string length and call stack depth))
 '''
-def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+def wordBreak1(s, wordDict):
         if not s or not wordDict: return False
         set_dic = set(wordDict)
-        return self.rec(s, set_dic)
+        return rec(s, set_dic)
     
 def rec(self, s, set_dic):
         if len(s) == 0:
@@ -25,12 +19,12 @@ def rec(self, s, set_dic):
             
         return False
     
-'''
-    2WAY
-    Bottom-top DP 
-    TIME:O(N^2)
-'''
-def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+# '''
+#     2WAY
+#     Bottom-top DP 
+#     TIME:O(N^2) 
+# '''
+def wordBreak2(s, wordDict):
         if not s or not wordDict: return False
         
         #create set than list save space
@@ -47,3 +41,38 @@ def wordBreak(self, s: str, wordDict: List[str]) -> bool:
                     dp[i] = True
                     
         return dp[len(s)]
+
+'''
+3WAY
+TOP-BOTTOM DP/recursion with memorization
+EASY TO UNDERSTAND
+TIME:O(n^2)
+'''
+def wordBreak3(s,wordDict):
+        # recursion memo => top-bottom dp
+        if not s or not wordDict: return False
+        ws = set(wordDict) # not have to since all string in dict are unique
+        
+        memo = {} #store{startindexofS:T/F}
+        def helper(s):
+            if s in memo:
+                return memo[s]
+            
+            if len(s) == 0: #to the end
+                return True
+            
+            for i in range(1, len(s)+1):
+                if s[0:i] not in ws:
+                    continue
+                # now s[0:i] in dict
+                res = helper(s[i:])
+                if res:
+                    memo[s] = True
+                    return True
+                
+            memo[s] = False
+            return False
+
+        return helper(s)
+print(wordBreak2("catsandog",
+["cats","dog","sand","and","cat"]))
