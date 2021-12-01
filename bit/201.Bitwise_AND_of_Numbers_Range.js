@@ -42,3 +42,15 @@ function msbPos(n) {
 }
 
 console.log(rangeBitwiseAnd(1, 5));
+
+//Second Solution
+//[5,7] has three number 101, 110, 111
+//100&110&111=>100
+//Find the common left part
+//SOLUTION: move both m&n, shift right, until same, mark moving times. then move m back left i times
+i = 0
+        while m != n:
+            m >>= 1
+            n >>= 1
+            i += 1
+        return m << i

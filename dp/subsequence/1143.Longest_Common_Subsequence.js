@@ -67,6 +67,28 @@ const helper = function (text1, text2, p1, p2, dp) {
 
 console.log(longestCommonSubsequence("abbbbcddda", "ace")); //2
 
+//SLOW
+def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        # subsequence order does matter, find many common as possible
+        memo = [[0 for j in range(len(text2))] for i in range(len(text1))]
+
+        def helper(i, j):
+            # terminate case no common anymore
+            if i == len(text1): return 0
+            if j == len(text2): return 0
+            # visited store in cacahe
+            if memo[i][j] != 0: return memo[i][j]
+            
+            if text1[i] == text2[j]:
+                # find one common update memo
+                memo[i][j] = 1 + helper(i+1, j+1)
+                return memo[i][j]
+            
+            memo[i][j] = max(helper(i+1, j), helper(i, j+1))
+            return memo[i][j]
+            
+        return helper(0,0)
+        
 /*
 3.bottom-up
 For every i in text1, j in text2, we will choose one of the following two options:
@@ -96,3 +118,20 @@ const longestCommonSubsequence = function (text1, text2) {
   }
   return dp[text1.length][text2.length];
 };
+
+//583. Delete Operation for Two Strings
+def minDistance(self, word1: str, word2: str) -> int:
+        #TOPIC:Minimum delete times to make two string same: n1+n2-longest common subsequence*2
+        #HOW:bottom-top dp, two strings compare need 2D array,size +1(because[0] is empty string)
+        if not word1 or not word2: return 0
+        
+        dp = [[0 for j in range(len(word2)+1)] for i in range(len(word1) + 1)]
+        
+        for i in range(1,len(word1)+1):
+            for j in range(1,len(word2)+1):
+                if word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+        
+        return len(word1) + len(word2) - 2 * dp[len(word1)][len(word2)]
