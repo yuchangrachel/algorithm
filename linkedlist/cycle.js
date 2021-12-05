@@ -40,3 +40,27 @@ var detectCycle = function (head) {
   }
   return null;
 };
+
+//160. Intersection of Two Linked Lists
+'''
+    OPIC:Intersection of Two LinkedList => CYCLE logic
+    LOGIC:
+    1.This is linkedlist Intersection, both use .next, if reach end, then switch into opposite side's head
+    2.Maybe go to two rounds, then they meet, sumiliar two pointer(fast&slower)
+    3.No intersection: if go through many rounds, both arrive null(after tail)
+    '''
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        if not headA or not headB: return None
+        curA = headA
+        curB = headB
+        
+        while curA != curB:
+            if not curA:
+                curA = headB
+            else:
+                curA = curA.next
+            if not curB:
+                curB = headA
+            else:
+                curB = curB.next
+        return curA
