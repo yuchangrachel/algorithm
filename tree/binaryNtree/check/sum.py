@@ -1,3 +1,42 @@
+#112.Path Sum
+# TOPIC: if there is root-leaf path can sum up to targetSum
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        #base case if go to null after leaf, mean didnt find path sum up to targeSum
+        if not root: return False
+        if not root.left and not root.right: #it is leaf
+            if targetSum - root.val == 0: return True
+        
+        return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
+
+
+#113. Path Sum II
+'''
+    TOPIC:Show all result paths which root-leaf path can sum up to targetSum(Backtracking)
+    STEP:
+    1.helper(root,targetsum, curlist, resnestedlist)
+    2.Since didnt find match will pop out, so add node at beginnning and not 'return'
+    '''
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        # corner case(MUST) because in helper dfs,will add node redirectly
+        if not root: return []
+        res = []
+        self.dfs(root, targetSum, [], res)
+        return res
+    
+    def dfs(self, node, remainsum, curls, res):     
+        curls.append(node.val)
+        #terminate case
+        if not node.left and not node.right: #now it is leaf, check if valid path
+            if remainsum - node.val == 0:
+                res.append(curls.copy())
+
+        if node.left: self.dfs(node.left, remainsum - node.val, curls, res)
+        if node.right:self.dfs(node.right, remainsum - node.val, curls, res)
+        #backtrack
+        curls.pop()
+
+
+
 #129. Sum Root to Leaf Numbers
 '''
     Travesal tree from top to leaves. Do DFS(preorder) from bottom to top recursion
