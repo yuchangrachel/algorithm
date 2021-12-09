@@ -36,7 +36,25 @@ def dfs(self, node, remainsum, curls, res):
         curls.pop()
 
 
-
+#563. Binary Tree Tilt
+'''
+    TOPIC: abs(sum of left subtree, sum of right subtree) for each current node
+    STEP:
+    1.postordertraversal(root,res) res += abs(leftrec,rightrec)
+    2.Add sum, but didnt change val, so recursion return 
+'''
+def findTilt(self, root: Optional[TreeNode]) -> int:
+        self.res = 0
+        def postorder(root):
+            if not root: return 0
+            lefter = postorder(root.left)
+            righter = postorder(root.right)
+            self.res += abs(lefter - righter) # tilt for cur node
+            return root.val + lefter + righter # total sum for cur node(included)
+        postorder(root)
+        return self.res
+        
+...........................
 #129. Sum Root to Leaf Numbers
 '''
     Travesal tree from top to leaves. Do DFS(preorder) from bottom to top recursion
