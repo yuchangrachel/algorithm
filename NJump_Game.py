@@ -1,18 +1,18 @@
+# 55.Jump Game
 '''
-55. Jump Game
-    LOGIC:
-    1. Need maxIndex variable update if >= lastIndex => True
+    TOPIC:Traverse Array jump value to see if go to last index
+    STEP:
+    1.corner case nums is [0], one number => true
+    2.if meet cur == 0 and farthest <= curindex => false
+    3.update farthest, can use farthest to see if reach last
 '''
-def canJump(nums):
-        if len(nums) <= 1: return True #[0]
-        
-        maxIndex = 0
+def canJump(self, nums: List[int]) -> bool:
+        if len(nums) <= 1: return True
+        farthest = 0
         for i in range(len(nums)):
-            if maxIndex <= i and nums[i] == 0: #cannot jump  
-                return False
-            maxIndex = max(maxIndex, i + nums[i])
-            if maxIndex >= len(nums) - 1: return True
-            
+            if nums[i] == 0 and farthest <= i: return False
+            farthest = max(farthest, i+nums[i])
+            if farthest >= len(nums)-1: return True
         return False
 # print(canJump([3,2,1,0,4])) #[0]=>true [3,2,1,0,4]=>false [0,2,3]=>false
 
