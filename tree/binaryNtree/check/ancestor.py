@@ -12,15 +12,19 @@ def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
             return root
 
 # 236. Lowest Common Ancestor of a Binary Tree
-# https://www.youtube.com/watch?v=WRAJ8Q9bICM
+'''
+    TOPIC:ancestor
+    STEP:
+    1.if left and right return NOT NULL, cur as LCA
+    2,if left return NULL, right is LCA
+    3.if right return NULL, left is LCA
+     eg.root(3), search p(5), q(4), do recursion handle 5 first, return right away, which near root, wont go 4
+'''
 def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        # base case
-        if (not root) or (root == p) or (root == q):
+        if not root: return None
+        if root == p or root == q: return root
+        lefter = self.lowestCommonAncestor(root.left, p, q)
+        righter = self.lowestCommonAncestor(root.right, p, q)
+        if lefter and righter: #both not null
             return root
-        
-        left_sub = self.lowestCommonAncestor(root.left, p, q)
-        right_sub = self.lowestCommonAncestor(root.right, p, q)
-        
-        if left_sub and right_sub:
-            return root
-        return left_sub or right_sub
+        return lefter or righter

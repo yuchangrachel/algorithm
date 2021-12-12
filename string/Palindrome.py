@@ -1,31 +1,22 @@
 #5. Longest Palindromic Substring
-def longestPalindrome(self, s: str) -> str:
-        '''
-        center expand, palindrome two situations: aba, abba
-        b
-        a -> bab
-        b -> aba
-        a 
-        d
-        '''
+'''
+    TOPIC:longest palindromic subtring:CENTER EXPAND
+    STEP:
+    1.create helper isPalindrome(str, left,right) expand two sides from center, return palindrome string
+    2.use ispalindrome(i,i) and isplandrome(i,i+1)
+'''
+    def longestPalindrome(self, s: str) -> str:
+        if not s or len(s) == 0: return s
         res = ""
-        max_len = 0
         for i in range(len(s)):
-            p1 = self.isPalindrome(s, i, i)
-            p2 = ""
-            if i != len(s) - 1:
-                p2 = self.isPalindrome(s, i, i+1)
-            if len(p1) >= max_len:
-                res = p1
-                max_len = len(p1)
-            if len(p2) >= max_len:
-                res = p2
-                max_len = len(p2)
+            if len(self.isPalindrome(s,i,i)) > len(res):
+                res = self.isPalindrome(s,i,i)
+            if i+1 < len(s) and len(self.isPalindrome(s,i, i+1)) > len(res):
+                res = self.isPalindrome(s, i,i+1)
         return res
-            
-            
+                
         
-def isPalindrome(self, s, left, right):
+    def isPalindrome(self, s, left, right):
         while left >= 0 and right < len(s) and s[left] == s[right]:
             left -= 1
             right += 1

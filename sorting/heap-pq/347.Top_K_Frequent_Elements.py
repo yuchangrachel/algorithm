@@ -25,6 +25,23 @@ def topKFrequent(self, nums: List[int], k: int) -> List[int]:
             res.append(num)
         
         return res
+        
+        def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        if not nums: return []
+        minheap = []
+        res = []
+        count = collections.Counter(nums)
+        for key, v in count.items():
+            heappush(minheap, (v, key))
+            
+            if len(minheap) > k:                
+                heappop(minheap)
+        
+        while len(minheap) > 0:
+            res.append(heappop(minheap)[1])
+        
+        return res
+        
 
 # USE SORTING + HASHTABLE
 # O(nlogn)
