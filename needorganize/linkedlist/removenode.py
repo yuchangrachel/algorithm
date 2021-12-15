@@ -98,38 +98,30 @@ def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
                 cur = cur.next
         return head
 
-'''     
-82. Remove Duplicates from Sorted List II
-var deleteDuplicates = function(head) {
-    /*
-    TOPIC:Remove nodes
-    HOW:
-    remove all duplicates, so maybe need remove head so need create dummy
-    handle cases like 1->1->2 and 1->2,use cur for tracking duplicate loop
-    variable:prev link to next, cur tracking duplicate loop
-    */
-    
-    if (head === null) return head
-    
-    let dummy = new ListNode(-1)
-    
-    dummy.next = head
-    let prev = dummy
-    while (prev.next != null){
-        let cur = prev.next
-        //track duplicate loop
-        while (cur.next && cur.val == cur.next.val){
-            cur = cur.next
-        }
-        if (prev.next == cur){
-            //didnt have duplicate so far
-            prev = prev.next
-        }
-        else{
-            //have duplicate sublist need link this sublist's next
-            prev.next = cur.next
-        }       
-    }
-    return dummy.next   
-};
+   
+#82. Remove Duplicates from Sorted List II
 '''
+    TOPIC:delete all duplicates
+    STEP:
+    1.head maybe duplicates, so need BUILD new linkedlist;dummy
+    2.prev hold whole linkedlist, each time create new cur for track duplicate fpr while duplicate loop
+    3.if prev.next!=cur(duplicates exist), prev.next=cur.next; if prev.next==cur:no duplicate, update prev, prev=cur
+    '''
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head: return None
+        dummy = ListNode(-1)
+        dummy.next = head
+        prev = dummy
+        
+        while prev.next:
+            cur = prev.next
+            #each time set cur, since handle duplicate
+            while cur and cur.next and cur.val == cur.next.val:
+                cur = cur.next
+            #now cur is this duplicates's last node
+            if prev.next != cur: #has duplicate
+                prev.next = cur.next
+            else: #no duplicate move prev forward
+                prev = cur 
+        
+        return dummy.next
