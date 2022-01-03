@@ -1,7 +1,9 @@
 '''
     TOPIC:cur as ancestor, find his child node has with max diff to him
     STEP:
-    1.pretraversal, traverse parent first(find max diff for parent), then find max, min(because abs, [1-8][8-14]), update res max min to next child
+    1.pretraversal, traverse parent first, so later two parts recursion will call back to root
+    2.(find max diff for parent)res=max/min(res,abs(m-root.val))
+    3.update max,min
 '''
 def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
         if root is None:
