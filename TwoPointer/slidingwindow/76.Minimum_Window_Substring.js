@@ -45,43 +45,44 @@ const minWindow = function (s, t) {
 };
 
 console.log(minWindow("ADOBECODEBANC", "ABC")); //"BANC"
-/*
 '''
-    1.sliding window, window size is changable
-    2.hash store t {char: frq}
-    3.count,left
+    TOPIC:find mini substring of s contains all chars in t(t order matter!)
+    STEP:Sliding window,window size is fixed:widow is t
+    1.store t as chararray 256{ch code:freq}
+    2.iterate s, update chararray. handle valid, left, handle res(find min)
+    3.corner case:"b" "a"=>"" "A" "A"=>"A"
     '''
     def minWindow(self, s: str, t: str) -> str:
-        if not s or not t or len(t) > len(s): return ""
-        
-        dic = collections.defaultdict(int)
+        if s is None or t is None or len(t) > len(s): return ""
+        # create chararray for t
+        char = [0] * 256
         for c in t:
-            dic[c] += 1
+            char[ord(c)] += 1
         
-        count = 0
+        # set up variable
         left = 0
-        res = ""
-        max_len = len(s) + 1 #check if meet, if not return "" but len(s) still valid since s = t
+        res = s
+        count = 0
+        max_len = len(s) + 1 # think corner case
+        
+        # iterate s
         for i in range(len(s)):
-            # update hash
-            dic[s[i]] -= 1
+            #update chararray
+            char[ord(s[i])] -= 1
             
-            #valid
-            if dic[s[i]] >= 0:
+            #check valid
+            if char[ord(s[i])] >= 0:
                 count += 1
-                
-            # move left
-            while left < i and dic[s[left]] < 0:
-                dic[s[left]] += 1
+            
+            #check left when invalid for left part
+            while left < i and char[ord(s[left])] < 0:
+                char[ord(s[left])] += 1 # recover
                 left += 1
             
+            #get res
             if count == len(t) and i - left + 1 < max_len:
+                res = s[left:i+1]
                 max_len = i - left + 1
-                res = s[left: i+1]
-                
-        if max_len == len(s) + 1:
-            return ""
-        else:
-            return res
+            
+        return "" if max_len == len(s) + 1 else res
         
-*/
