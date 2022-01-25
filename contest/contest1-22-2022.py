@@ -1,3 +1,4 @@
+#1
 def rearrangeArray(nums):
         # think corner case
         # same sign
@@ -46,31 +47,22 @@ def rearrangeArray(nums):
 
 # print(rearrangeArray([-1,1]))
 
+#2 easy
+
+#3
+# 2150. Find All Lonely Numbers in the Array
 from collections import Counter
-def findLonely(nums):
-        # res = []
-        # visit = set()
-        # for n in nums:
-        #     if n in visit:
-        #         if n in res:
-        #             res.remove(n)
-        #         continue
-        #     else:
-        #         visit.add(n)
-        #         if (n+1) not in nums and (n-1) not in nums:
-        #             res.append(n)
-                
-        # return res
-        mapping = Counter(nums)
+def findLonely(self, nums: List[int]) -> List[int]:
+        mapping = collections.Counter(nums)
         res = []
-        for n in nums:
-            if mapping[n] > 1:
-                continue
-            else:
-                if (n+1) not in nums and (n-1) not in nums:
-                    res.append(n)
+        for n in nums:            
+            if (n-1) not in mapping.keys() and (n+1) not in mapping.keys() and mapping[n] == 1:
+                res.append(n)
         return res
         
-            
-print(findLonely([1,3,5,3]))
-print(findLonely([10,6,5,8]))
+# print(findLonely([1,3,5,3]))
+# print(findLonely([10,6,5,8]))
+
+
+#4
+# 2151. Maximum Good People Based on Statements
