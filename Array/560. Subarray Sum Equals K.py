@@ -17,3 +17,19 @@
             mapping[total] += 1
         return res
         
+ var subarraySum = function(nums, k) {
+    if (nums === null || nums.length == 0) return 0
+    const mapping = new Map()
+    mapping.set(0,1)
+    let res = 0
+    let total = 0
+    for (let n of nums){
+        total += n
+        if (mapping.get(total-k)>0){
+            res += mapping.get(total-k)
+        }
+        mapping.set(total, (mapping.get(total) || 0) + 1)
+    }
+
+    return res
+};

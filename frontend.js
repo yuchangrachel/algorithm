@@ -1,16 +1,23 @@
-//1.Intersection of unsorted arrays
-function getIntersection(arr1, arr2) {
-  setter = new Set(arr1);
-  for (const n of arr2) {
-    if (!setter.has(n)) {
-      setter.delete(n);
+/*
+1.remove characters:Given a string contaning only a, b and c, remove all b and ac.
+*/
+//1WAY Stack
+function removeChars(input) {
+  // your code here
+  const stack = []
+  for (let c of input){
+    if (c === 'a'){
+      stack.push(c)
+    }
+    else if (c === 'c'){
+      if (stack.length && stack[stack.length-1] === 'a'){
+        stack.pop()
+      }
+      else{
+        stack.push(c)
+      }
     }
   }
-  return [...setter];
+  return stack.join("")
 }
-console.log(
-  getIntersection(
-    [1, 100, 200, 8, 8, 8, 3, 6, 100, 10, 10],
-    [8, 7, 7, 50, 50, 1, 1, 1, 1, 3, 3]
-  )
-);
+
